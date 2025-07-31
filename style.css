@@ -1,0 +1,44 @@
+/* INDEX.HTML */
+.navbar-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px; /* Adiciona um espaçamento entre as letras para um visual mais clean */
+    font-size: 2rem; /* Aumenta o tamanho da fonte. '2rem' é o dobro do tamanho padrão. */
+}
+
+.container-card {
+    display: flex;
+    /* Adicionado para fazer os cards se ajustarem em linhas se a tela for pequena */
+    flex-wrap: wrap; 
+    justify-content: center; /* Centraliza os cards */
+}
+
+.card {
+    margin: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    /* Adicionado para garantir que os cards tenham a mesma altura, útil se os títulos ou textos tiverem tamanhos diferentes */
+    display: flex; 
+    flex-direction: column;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow maior e mais escuro ao passar o mouse */
+}
+
+/* Estilizando as imagens dos cards */
+.card-img-top {
+    width: 100%; /* Garante que a imagem ocupe 100% da largura do card */
+    height: 200px; /* Define uma altura fixa para todas as imagens */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção, cortando as partes extras */
+}
+
+.card-body {
+    /* Adicionado para que o corpo do card ocupe o espaço restante e empurre o conteúdo para baixo */
+    flex-grow: 1; 
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+}
