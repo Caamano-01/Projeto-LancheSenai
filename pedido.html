@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><h1>Fazer pedido</h1></a>
+             <div>
+                <a class="btn btn-outline-light" href="index.html">Inicío</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pedido">
+        <div id="alert-pedido" class="alert alert-info alert-dismissible fade show" role="alert" style="display: none;">
+            <h4 class="alert-heading">Finalize seu pedido</h4>
+            <p>Seu pedido será realizado após o pagamento.</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <form id="form-pedido">
+            <h2>Nome:</h2>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="nome" placeholder="Seu nome">
+            </div>
+
+            <h2>Celular:</h2>
+            <div class="mb-3">
+                <input type="number" class="form-control" id="celular" placeholder="(51) 00000-0000">
+            </div>
+
+            <h2>Email:</h2>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
+
+            <h2>Bebida:</h2>
+            <select class="form-select" id="bebida-select" aria-label="Default select example">
+                <option selected data-preco="0">Escolha sua bebida</option>
+                <option value="1" data-preco="5.00">Água s/gás</option>
+                <option value="2" data-preco="5.50">Água c/gás</option>
+                <option value="3" data-preco="5.00">Suco</option>
+                <option value="4" data-preco="7.50">Coca-cola s/açúcar</option>
+                <option value="5" data-preco="6.99">Coca-cola</option>
+                <option value="6" data-preco="6.00">Fanta uva</option>
+                <option value="7" data-preco="7.00">Guaraná antarctica</option>
+            </select>
+
+            <h2>Lanche:</h2>
+            <select class="form-select" id="lanche-select" aria-label="Default select example">
+                <option selected data-preco="0">Escolha seu lanche</option>
+                <option value="1" data-preco="25.00">Brooklyn 99 Fresh</option>
+                <option value="2" data-preco="20.00">Office Lunch Break</option>
+                <option value="3" data-preco="29.99">Sheldon's Comfort</option>
+                <option value="4" data-preco="34.99">Friends Reunion</option>
+                <option value="5" data-preco="27.99">Dexter's Slice</option>
+                <option value="6" data-preco="37.99">Breaking Burguer</option>
+                <option value="7" data-preco="29.99">Thrones Burguer</option>
+            </select>
+
+            <h2>Observações:</h2>
+            <div class="mb-3">
+                <textarea class="form-control" id="observacoes" rows="3"></textarea>
+            </div>
+
+            <div class="card bg-light p-3 mb-3">
+                <h4 class="text-center">Resumo do Pedido</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Bebida: <span id="bebida-preco">R$ 0,00</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Lanche: <span id="lanche-preco">R$ 0,00</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>Total:</strong> <strong id="total-preco">R$ 0,00</strong>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-dark" type="submit" id="btn-pedido">Fazer pagamento</button>
+            </div>
+        </form>
+
+        <div id="qrcode-container" class="mt-4 text-center" style="display: none;">
+            <h3>Escaneie para pagar</h3>
+            <img id="qrcode-img" src="" alt="QR Code de pagamento">
+            <p><strong>Valor:</strong> <span id="valor-pagamento"></span></p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bebidaSelect = document.getElementById('bebida-select');
+            const lancheSelect = document.getElementById('lanche-select');
+            const bebidaPrecoSpan = document.getElementById('bebida-preco');
+            const lanchePrecoSpan = document.getElementById('lanche-preco');
+            const totalPrecoStrong = document.getElementById('total-preco');
+            const formPedido = document.getElementById('form-pedido');
+            const qrcodeContainer = document.getElementById('qrcode-container');
+            const qrcodeImg = document.getElementById('qrcode-img');
+            const valorPagamentoSpan = document.getElementById('valor-pagamento');
+            const btnPedido = document.getElementById('btn-pedido');
+            const alertPedido = document.getElementById('alert-pedido');
+
+            function atualizarTotal() {
+                const bebidaPreco = parseFloat(bebidaSelect.options[bebidaSelect.selectedIndex].getAttribute('data-preco'));
+                const lanchePreco = parseFloat(lancheSelect.options[lancheSelect.selectedIndex].getAttribute('data-preco'));
+
+                const total = bebidaPreco + lanchePreco;
+
+                bebidaPrecoSpan.textContent = `R$ ${bebidaPreco.toFixed(2).replace('.', ',')}`;
+                lanchePrecoSpan.textContent = `R$ ${lanchePreco.toFixed(2).replace('.', ',')}`;
+                totalPrecoStrong.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+                return total;
+            }
+
+            bebidaSelect.addEventListener('change', atualizarTotal);
+            lancheSelect.addEventListener('change', atualizarTotal);
+            
+            atualizarTotal();
+
+            formPedido.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const total = atualizarTotal();
+                
+                const qrcodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Pagamento de R$${total.toFixed(2).replace('.', ',')}`;
+
+                qrcodeImg.src = qrcodeUrl;
+                valorPagamentoSpan.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+                
+                // Primeiro exibe o QR Code e depois o alerta
+                qrcodeContainer.style.display = 'block';
+                alertPedido.style.display = 'block';
+
+                btnPedido.textContent = 'Pedido Gerado!';
+                btnPedido.disabled = true;
+            });
+        });
+    </script>
+</body>
+</html>

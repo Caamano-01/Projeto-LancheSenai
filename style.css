@@ -23,17 +23,26 @@
 .card:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow maior e mais escuro ao passar o mouse */
 }
-
-/* Estilizando as imagens dos cards */
-.card-img-top {
-    width: 100%; /* Garante que a imagem ocupe 100% da largura do card */
-    height: 200px; /* Define uma altura fixa para todas as imagens */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção, cortando as partes extras */
-}
-
 .card-body {
     /* Adicionado para que o corpo do card ocupe o espaço restante e empurre o conteúdo para baixo */
     flex-grow: 1; 
+}
+
+/*
+    Estilos para as imagens dos cards horizontais (cardapio.html)
+    - height: 150px para fixar a altura das imagens laterais
+    - object-fit: cover para manter a proporção e evitar distorções
+*/
+.card-body img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.promocoes {
+    text-align: center;
+    padding: 10px;
+    background-color: #ff5c00;
+    margin-top: 5px;
 }
 
 footer {
@@ -41,4 +50,13 @@ footer {
     text-align: center;
     margin-top: 10px;
     color: white;
+}
+
+.pedido {
+    margin: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color: rgb(242, 242, 242);
+    padding: 10px;
+    border-radius: 10px;
 }

@@ -16,12 +16,12 @@
 </head>
 <body>
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
         <div class="container">
             <a class="navbar-brand" href="#"><h2>Meu lanche Senai</h2></a>
             <div>
-                <a class="btn btn-outline-light">Sobre</a>
-                <a class="btn btn-outline-light">Contato</a>
+                <a class="btn btn-outline-light" href="cardapio.html">Cardápio</a>
+                <a class="btn btn-outline-light" href="pedido.html">Fazer pedido</a>
             </div>
         </div>
     </nav>
@@ -58,14 +58,16 @@
     </div>
 
     <!-- CARDS -->
+    <div class="promocoes">
+        <h1>Promoções</h1>
+    </div>
     <div class="container-card" class="row row-cols-1 row-cols-md-3 g-4">
         <!-- CARD 1 -->
         <div class="col">
             <div class="card">
-                <img src="img/Hamburguer1.jpg" class="card-img-top" alt="Brooklyn 99 Fresh">
+                <img src="img/promocao1.png" class="card-img-top" alt="Brooklyn 99 Fresh">
                 <div class="card-body">
                     <h5 class="card-title">Brooklyn 99 Fresh</h5>
-                    <p class="card-text">Preço: R$ 43,00</p>
                 </div>
             </div>
         </div>
@@ -73,10 +75,9 @@
         <!-- CARD 2 -->
         <div class="col">
             <div class="card">
-                <img src="img/Hamburguer2.jpg" class="card-img-top" alt="Office Lunch Break">
+                <img src="img/promocao2.png" class="card-img-top" alt="Office Lunch Break">
                 <div class="card-body">
                     <h5 class="card-title">Office Lunch Break</h5>
-                    <p class="card-text">Preço: R$ 37,00</p>
                 </div>
             </div>
         </div>
@@ -84,10 +85,9 @@
         <!-- CARD 3 -->
         <div class="col">
             <div class="card">
-                <img src="img/Hamburguer3.jfif" class="card-img-top" alt="Sheldon's Comfort">
+                <img src="img/promocao3.png" class="card-img-top" alt="Sheldon's Comfort">
                 <div class="card-body">
                     <h5 class="card-title">Sheldon's Comfort</h5>
-                    <p class="card-text">Preço: R$ 39,50</p>
                 </div>
             </div>
         </div>
@@ -95,24 +95,24 @@
         <!-- CARD 4 -->
         <div class="col">
             <div class="card">
-            <img src="img/Hamburguer4.jpg" class="card-img-top" alt="Friends Reunion">
+            <img src="img/promocao4.png" class="card-img-top" alt="Friends Reunion">
             <div class="card-body">
                 <h5 class="card-title">Friends Reunion</h5>
-                <p class="card-text">Preço: R$ 36,00</p>
             </div>
             </div>
         </div>
     </div>
     
     <!-- BUTTONS -->
-    <button style="margin-left: 10px;" type="button" class="btn btn-warning btn-lg">Cardápio</button>
-    <button type="button" class="btn btn-danger btn-lg">Fazer pedido</button>
+    <button style="margin-left: 10px;" type="button" class="btn btn-warning btn-lg" onclick="irParaCardapio()">Cardápio</button>
+    <button type="button" class="btn btn-danger btn-lg" onclick="fazerPedido()">Fazer pedido</button>
 
     <!-- FOOTER -->
     <footer class="bg-dark">
         <p>&copy; Meu lanche Senai</p>
     </footer>
     
+    <!-- Scripts -->
     <script src="scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
